@@ -29,6 +29,10 @@ Hints tell you whether to guess higher or lower. Score starts at 100 and drops 1
 | Hard mode range was `1–50` (easier than Normal's `1–100`) | `logic_utils.py` | Changed Hard range to `1–500` |
 | Score formula used `attempt_number + 1`, costing an extra 10 pts | `logic_utils.py` | Removed the `+ 1` |
 
+## Advanced Edge-Case Testing
+
+![Test Cases screenshot](test_cases.png)
+
 ## 📸 Demo
 
 ![Winning game screenshot](winning-pic.png)
