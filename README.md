@@ -33,6 +33,3 @@ Hints tell you whether to guess higher or lower. Score starts at 100 and drops 1
 
 ![Winning game screenshot](winning-pic.png)
 
-## 🚀 Stretch Features
-
-- [ ] [If you completed Challenge 4, insert a screenshot of your Enhanced Game UI here]
