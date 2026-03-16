@@ -1,38 +1,38 @@
 # 🎮 Game Glitch Investigator: The Impossible Guesser
 
-## 🚨 The Situation
+## 🕹️ About the Game
 
-You asked an AI to build a simple "Number Guessing Game" using Streamlit.
-It wrote the code, ran away, and now the game is unplayable. 
+A number guessing game built with Streamlit. Pick a difficulty, guess the secret number within the attempt limit, and rack up points by guessing in as few tries as possible.
 
-- You can't win.
-- The hints lie to you.
-- The secret number seems to have commitment issues.
+- **Easy** — range 1–20, 6 attempts
+- **Normal** — range 1–100, 8 attempts
+- **Hard** — range 1–500, 5 attempts
+
+Hints tell you whether to guess higher or lower. Score starts at 100 and drops 10 points per attempt, with a 5-point penalty for each wrong guess. Minimum win score is 10.
 
 ## 🛠️ Setup
 
 1. Install dependencies: `pip install -r requirements.txt`
-2. Run the broken app: `python -m streamlit run app.py`
+2. Run the app: `python -m streamlit run app.py`
+3. Run tests: `pytest tests/test_game_logic.py -v`
 
-## 🕵️‍♂️ Your Mission
+## 🐛 Bugs Found and Fixed
 
-1. **Play the game.** Open the "Developer Debug Info" tab in the app to see the secret number. Try to win.
-2. **Find the State Bug.** Why does the secret number change every time you click "Submit"? Ask ChatGPT: *"How do I keep a variable from resetting in Streamlit when I click a button?"*
-3. **Fix the Logic.** The hints ("Higher/Lower") are wrong. Fix them.
-4. **Refactor & Test.** - Move the logic into `logic_utils.py`.
-   - Run `pytest` in your terminal.
-   - Keep fixing until all tests pass!
-
-## 📝 Document Your Experience
-
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+| Bug | File | Fix |
+| --- | --- | --- |
+| "New Game" didn't reset `status`, so the game stayed won/lost | `app.py` | Added `st.session_state.status = "playing"` to the New Game handler |
+| "New Game" didn't clear `history`, old guesses carried over | `app.py` | Added `st.session_state.history = []` to the New Game handler |
+| `attempts` initialized to `1`, making "Attempts left" off by one | `app.py` | Changed initial value to `0` |
+| "Attempts left" showed stale count during a submit rerun | `app.py` | Used `st.empty()` placeholder, filled after submit logic runs |
+| Debug panel showed pre-submit score/attempts | `app.py` | Moved expander to bottom of script |
+| Changing difficulty didn't reset the game | `app.py` | Stored difficulty in session state; reset game when it changes |
+| Hard mode range was `1–50` (easier than Normal's `1–100`) | `logic_utils.py` | Changed Hard range to `1–500` |
+| Score formula used `attempt_number + 1`, costing an extra 10 pts | `logic_utils.py` | Removed the `+ 1` |
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+![Winning game screenshot](winning-pic.png)
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
+- [ ] [If you completed Challenge 4, insert a screenshot of your Enhanced Game UI here]
